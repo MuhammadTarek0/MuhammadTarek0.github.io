@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tarek Abdou – Games</title>
+<meta name="description" content="Shipped games and game systems by Muhammad Tarek Abdou, Senior Game Developer (Unity / C#).">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@112,600;112,800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #142030;
+    --panel: #1C2B3E;
+    --line: #2C3E55;
+    --text: #E6EBF1;
+    --muted: #94A3B6;
+    --sun: #EDB548;
+    --sea: #63B8B0;
+    --radius-lg: 14px;
+    --radius-sm: 6px;
+    --wrap: 1080px;
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --ink: #F1F4F7; --panel: #FFFFFF; --line: #D5DEE8;
+      --text: #15222F; --muted: #566577; --sun: #B57A0C; --sea: #2D7F78;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0; background: var(--ink); color: var(--text);
+    font: 400 17px/1.6 "IBM Plex Sans", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--sun); outline-offset: 3px; border-radius: 4px; }
+  .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 16px; }
+  h1, h2, h3 { font-family: "Archivo", sans-serif; font-stretch: 112%; line-height: 1.1; margin: 0; }
+
+  /* Hero */
+  header.hero { padding: 72px 0 40px; }
+  .hero h1 { font-size: clamp(2.4rem, 6vw, 4.2rem); font-weight: 800; letter-spacing: -0.01em; }
+  .hero .role { font-size: 1.15rem; color: var(--muted); margin: 14px 0 0; max-width: 60ch; }
+  .contact { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+  .contact a {
+    text-decoration: none; font-weight: 500; font-size: .95rem;
+    padding: 8px 16px; border: 1px solid var(--line); border-radius: 999px;
+  }
+  .contact a:hover { border-color: var(--sun); }
+
+  /* Career track: the one bold element */
+  .track { margin-top: 48px; }
+  .track ol {
+    list-style: none; margin: 0; padding: 0;
+    display: grid; grid-template-columns: 9fr 14fr 31fr 28fr; /* months at each studio, roughly */
+    gap: 4px;
+  }
+  .track li a {
+    display: block; text-decoration: none; height: 100%;
+    padding: 14px 12px 12px; background: var(--panel);
+    border-top: 4px solid var(--sea);
+  }
+  .track li:last-child a { border-top-color: var(--sun); }
+  .track li:first-child a { border-radius: var(--radius-sm) 0 0 var(--radius-sm); }
+  .track li:last-child a { border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+  .track li a:hover { background: var(--line); }
+  .track strong { display: block; font-family: "Archivo", sans-serif; font-stretch: 112%; font-size: 1rem; }
+  .track span { display: block; color: var(--muted); font-size: .82rem; }
+  .track-note { color: var(--muted); font-size: .85rem; margin-top: 10px; }
+  @media (max-width: 680px) {
+    .track ol { grid-template-columns: 1fr 1fr; }
+    .track li a { border-radius: var(--radius-sm) !important; }
+  }
+
+  /* Studio sections */
+  section.studio { padding: 64px 0 24px; border-top: 1px solid var(--line); }
+  .studio-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 6px 24px; margin-bottom: 32px; }
+  .studio-head h2 { font-size: clamp(1.7rem, 3.6vw, 2.4rem); font-weight: 800; }
+  .studio-head p { margin: 0; color: var(--muted); }
+
+  .game { display: grid; grid-template-columns: 1.15fr 1fr; gap: 32px; margin-bottom: 56px; align-items: start; }
+  @media (max-width: 860px) { .game { grid-template-columns: 1fr; gap: 20px; } .game > .media { order: 2; } }
+  .game h3 { font-size: 1.6rem; font-weight: 600; }
+  .game .kind { color: var(--muted); margin: 6px 0 14px; }
+  .stats { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 0 0 16px; padding: 0; list-style: none; }
+  .stats li { color: var(--sun); font-weight: 600; }
+  .game ul.built { margin: 0 0 18px; padding-left: 1.1em; max-width: 62ch; }
+  .game ul.built li { margin-bottom: 6px; }
+  .game ul.built li::marker { color: var(--sea); }
+  .links { display: flex; flex-wrap: wrap; gap: 8px; }
+  .links a {
+    font-size: .9rem; font-weight: 500; text-decoration: none;
+    padding: 6px 12px; border-radius: var(--radius-sm);
+    background: var(--panel); border: 1px solid var(--line);
+  }
+  .links a:hover { border-color: var(--sea); }
+  .status { display: inline-block; font-size: .85rem; color: var(--muted); border: 1px dashed var(--line); padding: 4px 10px; border-radius: var(--radius-sm); }
+
+  /* Media */
+  .media { display: grid; gap: 12px; }
+  .video { position: relative; aspect-ratio: 16 / 9; background: #000; border-radius: var(--radius-lg); overflow: hidden; }
+  .video iframe, .video img { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; object-fit: cover; }
+  .video button {
+    position: absolute; inset: 0; width: 100%; border: 0; padding: 0; cursor: pointer; background: transparent;
+  }
+  .video button::after {
+    content: ""; position: absolute; left: 50%; top: 50%; width: 68px; height: 48px; transform: translate(-50%, -50%);
+    border-radius: 12px; background: rgba(20, 32, 48, .85) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23EDB548' d='M8 5v14l11-7z'/%3E%3C/svg%3E") center / 26px no-repeat;
+  }
+  .video button:hover::after { background-color: rgba(20, 32, 48, 1); }
+  .caption { font-size: .85rem; color: var(--muted); margin: 0; }
+  .clips { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+  .clips .video { border-radius: var(--radius-sm); }
+  /* Phone-shaped previews for portrait gameplay */
+  .clips.portrait { grid-template-columns: repeat(4, 1fr); }
+  .clips.portrait .video, .clips.portrait .still { aspect-ratio: 9 / 18; }
+  .clips.portrait .still { width: 100%; object-fit: cover; object-position: top; border-radius: var(--radius-sm); display: block; }
+  .clips.portrait .video img { object-position: top; }
+  .clips.portrait .video button::after { width: 44px; height: 32px; background-size: 18px; border-radius: 9px; }
+  @media (max-width: 520px) { .clips.portrait { gap: 6px; } .clips.portrait .clip-label { font-size: .72rem; } }
+  .clip-label { font-size: .82rem; color: var(--muted); margin: 4px 0 0; }
+  .shots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .shots.two { grid-template-columns: repeat(2, 1fr); }
+  .shots img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: var(--radius-sm); display: block; }
+  .placeholder {
+    aspect-ratio: 16 / 9; border: 1px dashed var(--line); border-radius: var(--radius-sm);
+    display: grid; place-items: center; text-align: center; color: var(--muted); font-size: .8rem; padding: 8px;
+  }
+
+  /* Tools + prototypes */
+  .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+  .tool { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 20px; }
+  .tool h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 6px; }
+  .tool p { margin: 0; color: var(--muted); font-size: .95rem; }
+  .lead { color: var(--muted); max-width: 62ch; margin: -16px 0 28px; }
+
+  footer { padding: 48px 0 64px; border-top: 1px solid var(--line); color: var(--muted); font-size: .9rem; }
+</style>
+</head>
+<body>
+
+<header class="hero wrap">
+  <h1>Muhammad Tarek Abdou</h1>
+  <p class="role">Senior Game Developer. Seven years of Unity and C# on live mobile and browser games, from gameplay systems to the tooling, pipelines and package libraries teams build on.</p>
+  <nav class="contact" aria-label="Contact">
+    <a href="https://github.com/MuhammadTarek0">GitHub</a>
+    <a href="https://www.linkedin.com/in/muhammadtarekabdou">LinkedIn</a>
+    <a href="mailto:muhammadtarekabdou@gmail.com">Email</a>
+  </nav>
+
+  <div class="track">
+    <ol>
+      <li><a href="#mau"><strong>MAU Games</strong><span>2019–2020</span></a></li>
+      <li><a href="#mbc"><strong>MBC Group</strong><span>2020–2021</span></a></li>
+      <li><a href="#justdice"><strong>justDice</strong><span>2021–2024</span></a></li>
+      <li><a href="#bigpoint"><strong>Bigpoint</strong><span>2024–now</span></a></li>
+    </ol>
+    <p class="track-note">Each block is sized by time at the studio. Newest work is first below.</p>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ BIGPOINT ============ -->
+<section class="studio" id="bigpoint">
+  <div class="wrap">
+    <div class="studio-head">
+      <h2>Bigpoint</h2>
+      <p>Senior Game Developer, Hamburg, Jul 2024 – present</p>
+    </div>
+
+    <article class="game">
+      <div class="media">
+        <div class="video" data-yt="9rWwB0sawXQ" data-title="Skyrama Island Survival trailer"></div>
+        <p class="caption">Official trailer by Bigpoint.</p>
+
+        <!-- Gameplay clips from my own recording: data-start / data-end are in seconds,
+             data-poster is the preview image shown before play. -->
+        <div class="clips portrait">
+          <div>
+            <img class="still" loading="lazy" src="assets/skyrama-main.jpg" alt="Flight mode: a player plane firing at an enemy over the sea">
+            <p class="clip-label">Flight mode</p>
+          </div>
+          <div>
+            <div class="video" data-yt="k9uLtE_GU7Y" data-start="276" data-end="299" data-poster="assets/skyrama-ftue.jpg" data-title="First-time user experience"></div>
+            <p class="clip-label">First-time user experience</p>
+          </div>
+          <div>
+            <div class="video" data-yt="k9uLtE_GU7Y" data-start="357" data-end="373" data-poster="assets/skyrama-iap.jpg" data-title="In-app purchases and tooltips"></div>
+            <p class="clip-label">In-app purchases and tooltips</p>
+          </div>
+          <div>
+            <div class="video" data-yt="k9uLtE_GU7Y" data-start="517" data-end="535" data-poster="assets/skyrama-gems.jpg" data-title="Missing resources and instant gem finish"></div>
+            <p class="clip-label">Missing resources and instant gem finish</p>
+          </div>
+        </div>
+        <p class="caption">Clips from my own gameplay recording. Tap a screen to play that moment.</p>
+      </div>
+      <div>
+        <h3>Skyrama Island Survival</h3>
+        <p class="kind">Mobile strategy game, Unity, iOS and Android</p>
+        <ul class="stats"><li>50K+ downloads on Google Play</li></ul>
+        <ul class="built">
+          <li>Built the entire Unity front end, from day one through launch and live operations</li>
+          <li>Designed the core architecture: service locator, boot-flow gate system, save system, and local notifications for Android and iOS</li>
+          <li>Built the asset import and static-data tooling, and the editor tools designers use every day</li>
+          <li>Created and maintain Bigpoint's internal Unity package library, used across teams and sister studios</li>
+          <li>Built the cross-platform CI/CD pipeline with GitLab and Fastlane for Android and iOS</li>
+        </ul>
+        <div class="links">
+          <a href="https://apps.apple.com/pl/app/skyrama-island-survival/id6759098596">App Store</a>
+          <a href="https://play.google.com/store/apps/details?id=com.bigpoint.solstice">Google Play</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="game">
+      <div class="media">
+        <div class="video" data-yt="UB7GWzA8AXY" data-title="Seafight: Rise of the Submariner event"></div>
+        <p class="caption">Rise of the Submariner, a live event I worked on.</p>
+        <div class="video" data-yt="oBEYyyzTw4M" data-title="Seafight trailer"></div>
+        <p class="caption">Official trailer by Bigpoint.</p>
+      </div>
+      <div>
+        <h3>Seafight</h3>
+        <p class="kind">Browser MMO, Java backend</p>
+        <ul class="built">
+          <li>Built economy mechanics and the monthly events ranking system</li>
+          <li>Extended the in-house component system that defines how event enemies move, attack and defend, writing new components that run deterministically on the Java backend</li>
+          <li>Enemy AI behaviour for live events</li>
+        </ul>
+        <div class="links">
+          <a href="https://www.seafight.com/">Play in browser</a>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============ JUSTDICE ============ -->
+<section class="studio" id="justdice">
+  <div class="wrap">
+    <div class="studio-head">
+      <h2>justDice</h2>
+      <p>Senior Game Developer, Hamburg, Nov 2021 – Jun 2024</p>
+    </div>
+
+    <article class="game">
+      <div class="media">
+        <div class="video" data-yt="0r4aogO467o" data-title="Cash Arena gameplay"></div>
+        <div class="clips">
+          <div>
+            <div class="video" data-yt="0r4aogO467o" data-start="92" data-end="110" data-title="Battle loop"></div>
+            <p class="clip-label">Battle loop</p>
+          </div>
+          <div>
+            <div class="video" data-yt="0r4aogO467o" data-start="351" data-end="371" data-title="Formations and buffs"></div>
+            <p class="clip-label">Formations and buffs</p>
+          </div>
+          <div>
+            <div class="video" data-yt="0r4aogO467o" data-start="151" data-end="170" data-title="Loot boxes"></div>
+            <p class="clip-label">Loot boxes</p>
+          </div>
+          <div>
+            <div class="video" data-yt="De4ex3h5A6s" data-start="75" data-end="82" data-title="Season pass"></div>
+            <p class="clip-label">Season pass</p>
+          </div>
+          <div>
+            <div class="video" data-yt="De4ex3h5A6s" data-start="90" data-end="150" data-title="Deck and unit upgrades"></div>
+            <p class="clip-label">Deck and unit upgrades</p>
+          </div>
+        </div>
+        <p class="caption">Clips from my own gameplay recordings.</p>
+        <div class="video" data-yt="Z_Tp5FX1jfg" data-title="Cash Arena player video"></div>
+        <p class="caption">Gameplay recorded by a player.</p>
+      </div>
+      <div>
+        <h3>Cash Arena</h3>
+        <p class="kind">Mobile battle strategy game, Unity</p>
+        <p class="status">No longer live</p>
+        <ul class="built" style="margin-top:14px">
+          <li>Sole developer on the project, end to end</li>
+          <li>Designed a deterministic battle core loop as a state machine with four phases (start, abilities, fight, end), applying designer-defined priorities and area-of-effect rules</li>
+          <li>Built a formation system: placing units in certain formations grants buffs and debuffs, the game's signature mechanic</li>
+          <li>Built the ability and timing system, driven by the live config system (AMS)</li>
+          <li>Built a replay system that uses the deterministic core to reproduce battles exactly</li>
+          <li>Built the meta layer: season pass, deck management, unit upgrades and loot boxes</li>
+          <li>Built designer tooling, including an equation and graph parser DSL so designers could change formulas without code</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="game">
+      <div class="media">
+        <div class="video" data-yt="Ul8gj7NwR00" data-title="Cash Empire player video"></div>
+        <p class="caption">Gameplay recorded by a player.</p>
+      </div>
+      <div>
+        <h3>Cash Empire</h3>
+        <p class="kind">Mobile idle game, Unity, iOS</p>
+        <ul class="built">
+          <li>Implemented localization for 11+ languages on top of Unity's Localization package</li>
+          <li>Built editor tools for faster string editing, narrative and translator comments, and rich-text support</li>
+        </ul>
+        <div class="links">
+          <a href="https://apps.apple.com/pl/app/ca%24h-empire/id1604393184">App Store</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="game">
+      <div class="media">
+        <div class="video" data-yt="rfs3GAGScQc" data-title="Money Heist gameplay"></div>
+        <div class="clips">
+          <div>
+            <div class="video" data-yt="rfs3GAGScQc" data-start="6" data-end="21" data-title="Dialogue system"></div>
+            <p class="clip-label">Dialogue system</p>
+          </div>
+          <div>
+            <div class="video" data-yt="rfs3GAGScQc" data-start="100" data-end="107" data-title="Quest system"></div>
+            <p class="clip-label">Quest system</p>
+          </div>
+          <div>
+            <div class="video" data-yt="rfs3GAGScQc" data-start="177" data-end="183" data-title="Loot boxes"></div>
+            <p class="clip-label">Loot boxes</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h3>Money Heist</h3>
+        <p class="kind">Mobile idle tycoon game, Unity</p>
+        <p class="status">Not live</p>
+        <ul class="built" style="margin-top:14px">
+          <li>Sole developer for nine months, building the whole game</li>
+          <li>Built a custom NPC traffic system for cars, garages and helicopters using raycasts and priorities, so vehicles fleeing the police or carrying more money get right of way</li>
+          <li>Tap any car, helicopter or heist member and a Cinemachine camera follows it</li>
+          <li>Built a dialogue system on Unity Localization with rich text, word-by-word reveal and double-tap to skip, loading dialogue from XML sheets into ScriptableObjects through an internal package</li>
+          <li>Built a quest-driven first-time user experience; finishing a city block plays a cinematic that shows the next goal</li>
+          <li>Built loot boxes with drop chances set on the server, rewarding managers and heist members that automate money collection</li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============ MBC ============ -->
+<section class="studio" id="mbc">
+  <div class="wrap">
+    <div class="studio-head">
+      <h2>MBC Group</h2>
+      <p>Game Developer, Alexandria, Sep 2020 – Oct 2021</p>
+    </div>
+
+    <article class="game">
+      <div class="media">
+        <div class="video" data-yt="EZsivR032zo" data-title="Fananees Run gameplay"></div>
+      </div>
+      <div>
+        <h3>Fananees Run</h3>
+        <p class="kind">Mobile endless runner, Unity, iOS and Android</p>
+        <ul class="stats"><li>5M+ downloads</li><li>4.3 stars on Google Play</li></ul>
+        <ul class="built">
+          <li>Game developer on the team that built and launched it</li>
+          <li>Built procedural obstacle generation and seamless ground tiling</li>
+          <li>Optimized for low-end devices, common in the game's MENA market</li>
+          <li>Built leaderboards, score persistence, and account and device linking</li>
+          <li>Worked with the digital marketing team to bring their art and assets into Unity</li>
+        </ul>
+        <div class="links">
+          <a href="https://apps.apple.com/us/app/fananees-run/id1237115227">App Store</a>
+          <a href="https://play.google.com/store/apps/details?id=com.gn4me.games.fananees">Google Play</a>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============ MAU ============ -->
+<section class="studio" id="mau">
+  <div class="wrap">
+    <div class="studio-head">
+      <h2>MAU Games</h2>
+      <p>Game Developer, Alexandria, Sep 2019 – Aug 2020</p>
+    </div>
+
+    <article class="game">
+      <div class="media">
+        <div class="shots">
+          <img loading="lazy" src="https://play-lh.googleusercontent.com/npZp5vOrvqRjpVozauIkNjoq3YaCnLMOSLb3MNiAJAzA2meIRhA64iU7NWw4hrXvTz8Vu4OiyEfejKcR5bVk9bs=w526-h296" alt="iBaloot table during a match">
+          <img loading="lazy" src="https://play-lh.googleusercontent.com/_1XPOQJlQWjLFXCty6LLP5D5etY7NCgpBFqmvGeKDuPJTOC4hkCaLrlq3qKxz2EZqQeWCeksgP6gdImxmjH_BA=w526-h296" alt="iBaloot screenshot">
+          <img loading="lazy" src="https://play-lh.googleusercontent.com/aMdg6Sv0Nd2Vc4RcAVQoe4YR2GAZKpzuUcSamlomYthtfm9UURhFtlHTWYitDrBb4DobzepmR2j5FwOGGyh6=w526-h296" alt="iBaloot screenshot">
+        </div>
+        <p class="caption">Store screenshots by MAU Games.</p>
+      </div>
+      <div>
+        <h3>iBaloot</h3>
+        <p class="kind">Live multiplayer card game for Saudi Arabia and the Gulf, Unity, iOS, Android and web</p>
+        <ul class="stats"><li>200K+ peak concurrent users</li><li>5M+ downloads and web logins</li></ul>
+        <ul class="built">
+          <li>Built the in-game voice chat (VoIP) system</li>
+          <li>Built chat moderation combining community flagging with a custom dictionary</li>
+          <li>Designed a per-player trust score that controls access to voice and text chat, so abusive players lose those features automatically</li>
+          <li>Built backend features in Java for the live game</li>
+        </ul>
+        <div class="links">
+          <a href="https://www.ibaloot.net/">Website</a>
+          <a href="https://apps.apple.com/us/app/ibaloot-%D8%A2%D9%8A-%D8%A8%D9%84%D9%88%D8%AA/id443938734">App Store</a>
+          <a href="https://play.google.com/store/apps/details?id=com.mau.ibaloot">Google Play</a>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============ PROTOTYPES ============ -->
+<section class="studio" id="prototypes">
+  <div class="wrap">
+    <div class="studio-head"><h2>Prototypes and unreleased work</h2></div>
+    <p class="lead">Games and prototypes that didn't reach the stores.</p>
+    <div class="video" data-list="PLQ7x8uFeiuLi81nKGvT5MHQe9C8l44dlX" data-title="Games showcase playlist" style="max-width:760px"></div>
+  </div>
+</section>
+
+<!-- ============ OTHER PROJECTS ============ -->
+<section class="studio" id="other">
+  <div class="wrap">
+    <div class="studio-head"><h2>Other projects</h2></div>
+
+    <article class="game">
+      <div class="media">
+        <div class="video" data-yt="e-kOJIt5vOA" data-title="BlueAge trailer"></div>
+        <div class="shots two">
+          <img loading="lazy" src="assets/blueage-crafting.jpg" alt="BlueAge crafting screen with a tutorial banner explaining the craft button">
+          <img loading="lazy" src="assets/blueage-slots.jpg" alt="BlueAge ship slots screen with a tutorial banner explaining weapon slots">
+        </div>
+        <p class="caption">Tutorial banners from the first-time user experience I built.</p>
+      </div>
+      <div>
+        <h3>BlueAge</h3>
+        <p class="kind">Open-world survival and exploration game with crafting, Windows. Made in 2019 by a team of six under GIZ supervision.</p>
+        <ul class="built">
+          <li>Built the enemy AI</li>
+          <li>Built the in-game economy</li>
+          <li>Built the first-time user experience</li>
+        </ul>
+        <div class="links">
+          <a href="https://muhammadtarek0.itch.io/blueage-giz">Download on itch.io</a>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============ TOOLS ============ -->
+<section class="studio" id="tools">
+  <div class="wrap">
+    <div class="studio-head"><h2>Tools and pipelines</h2></div>
+    <p class="lead">Work that other developers build on, beyond any single game.</p>
+    <div class="grid-2">
+      <div class="tool"><h3>Unity package library</h3><p>Internal UPM packages at Bigpoint, including static data, networking, UI framework, game economy and async tooling, adopted by several teams.</p></div>
+      <div class="tool"><h3>Build pipeline</h3><p>A build package used by 3–4 teams and sister studios in Asia, plus GitLab CI/CD for Android and iOS.</p></div>
+      <div class="tool"><h3>Designer tooling</h3><p>Editor windows, inspectors and an equation and graph parser DSL that let designers tune games without code changes.</p></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">Game names, art and trailers belong to their publishers. Shown here to illustrate my work on them.</div>
+</footer>
+
+<script>
+  // Click-to-load YouTube embeds: the page stays fast until someone presses play.
+  document.querySelectorAll('.video[data-yt], .video[data-list]').forEach(function (box) {
+    var id = box.dataset.yt, list = box.dataset.list, title = box.dataset.title || 'Video';
+    if (list) {
+      box.innerHTML = '<iframe loading="lazy" title="' + title + '" allow="encrypted-media; picture-in-picture; fullscreen" ' +
+        'src="https://www.youtube-nocookie.com/embed/videoseries?list=' + list + '"></iframe>';
+      return;
+    }
+    if (!id || id.indexOf('YOUR_') === 0) {
+      box.outerHTML = '<div class="placeholder">Add video ID and timestamps</div>';
+      return;
+    }
+    var poster = box.dataset.poster || ('https://i.ytimg.com/vi/' + id + '/hqdefault.jpg');
+    box.innerHTML = '<img loading="lazy" alt="" src="' + poster + '">' +
+      '<button type="button" aria-label="Play: ' + title + '"></button>';
+    box.querySelector('button').addEventListener('click', function () {
+      var p = 'autoplay=1&rel=0';
+      if (box.dataset.start) p += '&start=' + box.dataset.start;
+      if (box.dataset.end) p += '&end=' + box.dataset.end;
+      box.innerHTML = '<iframe title="' + title + '" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" ' +
+        'src="https://www.youtube-nocookie.com/embed/' + id + '?' + p + '"></iframe>';
+    });
+  });
+</script>
+</body>
+</html>
